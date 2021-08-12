@@ -6,7 +6,7 @@ configuration{
  	font: "Iosevka 12";
     show-icons: true;
 	icon-theme: "Tela-blue";
-    terminal: "st";
+    terminal: "alacritty";
     drun-display-format: "{icon} {name}";
     display-drun: "Run";
     location: 0;
