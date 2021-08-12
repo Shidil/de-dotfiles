@@ -1,0 +1,6 @@
+
+# relative line numbers
+add-highlighter global/number-lines number-lines
+add-highlighter global/wrap wrap
+
+add-highlighter global/show-matching show-matching

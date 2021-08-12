@@ -16,6 +16,9 @@ super + space
 alt + Tab
   rofi -show window
 
+super + alt
+  /home/shidil/.config/rofi/launchers/misc/launcher.sh
+
 # make sxhkd reload its configuration files:
 super + shift + r
 	pkill -USR1 -x sxhkd
@@ -34,7 +37,7 @@ super + {_,shift + }q
 
 # Screenshot
 Print
-  maim "/home/$USER/Pictures/$(date).png"
+  aplay "/home/$USER/camera-shutter-click-08.wav" > /dev/null 2>&1 & disown && maim "/home/$USER/Pictures/$(date).png"
 
 # Cropped Screenshot
 super + Print
@@ -145,3 +148,11 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#Volume Control
+XF86AudioLowerVolume
+	amixer set Master 5%-
+XF86AudioRaiseVolume
+	amixer set Master 5%+
+XF86AudioMute
+        amixer set Master toggle

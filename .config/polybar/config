@@ -48,8 +48,8 @@ border-color = ${colors.background}
 padding-left = 3
 padding-right = 3
 
-module-margin-left = 2
-module-margin-right = 2
+module-margin-left = 1
+module-margin-right = 1
 
 font-1 = Font Awesome 5 Free:style=Solid:pixelsize=11;2
 font-2 = Font Awesome 5 Brands:pixelsize=11;2
@@ -57,7 +57,7 @@ font-0 = Fira Code:style=normal:size=13;2
 
 modules-left    = launcher
 modules-center  = workspaces
-modules-right   = date volume cpu memory powermenu
+modules-right   = polypomo date pulseaudio-control cpu memory wireless-network powermenu
 
 wm-restack = bspwm
 
@@ -115,6 +115,22 @@ content-foreground=#81a1c1
 content-padding=0
 click-left= "bash ~/.config/polybar/scripts/launcher.sh"
 
+[module/polypomo]
+type = custom/script
+
+exec = ~/.config/polybar/scripts/polypomo
+tail = true
+
+label = %output%
+click-left = ~/.config/polybar/scripts/polypomo toggle
+click-right = ~/.config/polybar/scripts/polypomo end
+click-middle = ~/.config/polybar/scripts/polypomo lock
+scroll-up = ~/.config/polybar/scripts/polypomo time +60
+scroll-down = ~/.config/polybar/scripts/polypomo time -60
+
+font-0 = fixed:pixelsize=10;1
+font-1 = Noto Emoji:scale=15:antialias=false;0
+
 [module/volume]
 type = internal/pulseaudio
 format-volume = <ramp-volume> <label-volume>
@@ -130,6 +146,24 @@ ramp-volume-3 = 
 ramp-volume-4 = 
 ramp-volume-5 = 
 ramp-volume-6 = 
+
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+format-underline = ${colors.cyan}
+label-padding = 2
+label-foreground = ${colors.foreground}
+
+# Icons mixed from Font Awesome 5 and Material Icons
+# You can copy-paste your options for each possible action, which is more
+# trouble-free but repetitive, or apply only the relevant ones (for example
+# --sink-blacklist is only needed for next-sink).
+exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_2d_00.1.hdmi-stereo-extra4:PREDATOR " --sink-nickname "bluez_sink.EB_06_EF_48_95_1D.a2dp_sink:FLUKE " --sink-nickname "alsa_output.pci-0000_2f_00.4.analog-surround-21: Headset" listen
+click-middle = exec pavucontrol &
+click-left = pulseaudio-control togmute
+click-right = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
+scroll-up = pulseaudio-control --volume-max 130 up
+scroll-down = pulseaudio-control --volume-max 130 down
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -195,6 +229,57 @@ label-empty-padding = 2
 ; Separator in between workspaces
 ; label-separator = |
 
+
+[module/wireless-network]
+type = internal/network
+interface = wlp5s0
+interval = 3
+unknown-as-up = true
+
+; All labels support the following tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+
+; Default: %ifname% %local_ip%
+label-connected = %essid% %upspeed:2% %downspeed:2%
+label-connected-foreground = #eefafafa
+
+; Default: (none)
+label-disconnected = not connected
+label-disconnected-foreground = #66ffffff
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-5 = 
+
+; Only applies if <animation-packetloss> is used
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+
+format-connected = <ramp-signal> <label-connected>
+; Available tags:
+;   <label-disconnected> (default)
+format-disconnected = <label-disconnected>
+
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+format-packetloss = <animation-packetloss> <label-connected>
+
 [module/cpu]
 type = internal/cpu
 interval = 2
@@ -237,7 +322,7 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = #5e81ac
-label = %gb_used%
+label = %percentage_used%%
 
 [module/date]
 type = internal/date
@@ -248,6 +333,30 @@ time-alt  = %A, %d %B %Y
 format-prefix = 
 label = " %time%"
 
+[module/temperature]
+type = internal/temperature
+interval = 1
+
+; Thermal zone to use
+; To list all the zone types, run 
+; $ for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+; Default: 0
+thermal-zone = 0
+
+; Full path of temperature sysfs path
+; Use `sensors` to find preferred temperature source, then run
+; $ for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
+; to find path to desired file
+; Default reverts to thermal zone setting
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+
+; Base temperature for where to start the ramp (in degrees celsius)
+; Default: 0
+base-temperature = 20
+
+; Threshold temperature to display warning label (in degrees celsius)
+; Default: 80
+warn-temperature = 60
 
 [settings]
 screenchange-reload = true
@@ -261,4 +370,3 @@ screenchange-reload = true
 margin-top = 0
 margin-bottom = 0
 
-; vim:ft=dosini
