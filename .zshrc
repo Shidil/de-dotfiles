@@ -98,6 +98,17 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# Custom functions
+change_wallpaper() {
+	SOURCE=$1
+	DESTINATION=/home/$USER/.wallpaper
+
+	rm -rf $DESTINATION
+	ln -s $SOURCE $DESTINATION
+	feh --bg-fill $DESTINATION
+}
+
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -106,17 +117,39 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Program aliases
 alias vi="kak"
 alias vim="kak"
 alias nano="kak"
+alias ccat="/usr/bin/cat"
 alias cat="bat"
 
+# System commands shortcuts
 alias upgrade="sudo pacman -Syu"
-alias gs="git status"
 alias sc="source ~/.zshrc"
-alias projects="cd ~/projects"
 alias gengrub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
+# Work related alias
+alias gs="git status"
+alias projects="cd ~/projects"
+
+# Custom DE shortcuts
+alias wallpaper="change_wallpaper"
+
+#alias emcc="/usr/lib/emscripten/emcc"
+alias emactivate="source ~/projects/emsdk/emsdk_env.sh"
+alias bundletool="java -jar ~/apps/bundletool.jar"
+
+export RAYLIB_HOME=/home/$USER/projects/raylib
+export RAYLIB_PATH=/home/$USER/projects/raylib
+
+export ANDROID_HOME=/home/$USER/Android/Sdk
+export ANDROID_NDK=/home/$USER/Android/NDK
+export JAVA_HOME=/home/$USER/apps/android-studio/jre
+export JAVA_BIN=/home/$USER/apps/android-studio/jre/bin/
+
+export PATH=$PATH:$JAVA_BIN
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
