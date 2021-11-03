@@ -7,8 +7,8 @@
 # License:    MIT
 # References:
 #   https://github.com/alacritty/alacritty
-env:
-  TERM: alacritty
+# env:
+#   TERM: alacritty
 
 window:
   padding:
