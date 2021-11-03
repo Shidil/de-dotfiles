@@ -2,22 +2,29 @@
 
 Current OS: Arch Linux
 
-![Neofetch](./screenshots/neofetch.png)
+![Screenshot](./screenshots/desktop.png)
 
 ## Config
 
 DE: `bspwm`
+
 Terminal: `alacritty`
+
 Compositor: `picom`
+
 Launcher: `rofi`
+
 Bar: `polybar`
+
 Editor: `kak`
+
 Shell: `zsh`
+
 Prompt: `starship`
 
 ## Packages required
 
-`feh` `bspwm` `sxhkd` `alacritty` `rofi` `dunst` `starship`
+`feh` `bspwm` `sxhkd` `alacritty` `rofi` `dunst` `starship` `pulseaudio-control`
 
 ## How To
 
