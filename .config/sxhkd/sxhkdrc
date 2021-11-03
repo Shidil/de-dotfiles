@@ -37,7 +37,7 @@ super + {_,shift + }q
 
 # Screenshot
 Print
-  aplay "/home/$USER/camera-shutter-click-08.wav" > /dev/null 2>&1 & disown && maim "/home/$USER/Pictures/$(date).png"
+  aplay "/home/$USER/camera-shutter-click-08.wav" > /dev/null 2>&1 & disown && maim "/home/$USER/Pictures/$(date).png" && notify-send "Screenshot Captured"
 
 # Cropped Screenshot
 super + Print
