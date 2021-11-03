@@ -309,9 +309,13 @@ label-separator = " / "
 label-separator-foreground = ${colors.xcolor1}
 
 ; reboot
-menu-0-1 = 
-menu-0-1-exec = systemctl reboot
-menu-0-1-foreground = "#15aabf"
+menu-0-2 = 
+menu-0-2-exec = systemctl reboot
+menu-0-2-foreground = "#15aabf"
+; suspend
+menu-0-1 = 
+menu-0-1-exec = systemctl suspend
+menu-0-1-foreground = "#ffd43b"
 ; shutdown
 menu-0-0 = ""
 menu-0-0-exec = systemctl poweroff
