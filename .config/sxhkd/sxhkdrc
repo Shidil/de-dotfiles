@@ -12,7 +12,7 @@ super + 3
   code & disown
 
 super + space
-  rofi -modi drun -show
+  rofi -modi drun -show drun -theme "/home/$USER/.config/rofi/config.rasi"
 alt + Tab
   rofi -show window
 
