@@ -16,7 +16,7 @@ Launcher: `rofi`
 
 Bar: `polybar`
 
-Editor: `kak`
+Editor: `neovim`
 
 Shell: `zsh`
 
@@ -24,7 +24,7 @@ Prompt: `starship`
 
 ## Packages required
 
-`feh` `bspwm` `sxhkd` `alacritty` `rofi` `dunst` `starship` `pulseaudio-control`
+`feh` `bspwm` `sxhkd` `alacritty` `rofi` `dunst` `starship` `pulseaudio-control` `bat` `neovim`
 
 ## How To
 

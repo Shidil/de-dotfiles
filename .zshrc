@@ -119,9 +119,9 @@ change_wallpaper() {
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Program aliases
-alias vi="kak"
-alias vim="kak"
-alias nano="kak"
+alias vi="nvim"
+alias vim="nvim"
+alias nano="nvim"
 alias ccat="/usr/bin/cat"
 alias cat="bat"
 
