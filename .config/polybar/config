@@ -160,7 +160,7 @@ label-foreground = ${colors.foreground}
 # You can copy-paste your options for each possible action, which is more
 # trouble-free but repetitive, or apply only the relevant ones (for example
 # --sink-blacklist is only needed for next-sink).
-exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_2d_00.1.hdmi-stereo-extra4:PREDATOR " --sink-nickname "bluez_sink.EB_06_EF_48_95_1D.a2dp_sink:FLUKE " --sink-nickname "alsa_output.pci-0000_2f_00.4.analog-surround-21: Headset" listen
+exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_2d_00.1.hdmi-stereo-extra4:PREDATOR " --sink-nickname "bluez_sink.EB_06_EF_48_95_1D.a2dp_sink:FLUKE " --sink-nickname "alsa_output.pci-0000_2f_00.4.analog-stereo: Headset" listen
 click-middle = exec pavucontrol &
 click-left = pulseaudio-control togmute
 click-right = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
