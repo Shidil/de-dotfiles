@@ -1,1 +1,1 @@
-rofi -modi drun -show
+rofi -modi drun -show drun -theme "/home/$USER/.config/rofi/config.rasi"
